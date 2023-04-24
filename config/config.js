@@ -1,7 +1,7 @@
 require('dotenv').config()
 module.exports = {
   "development": {
-    "username": "corcoding",
+    "username": process.env.development_database_user,
     "password": null,
     "database": "mopnday-library",
     "host": "127.0.0.1",
