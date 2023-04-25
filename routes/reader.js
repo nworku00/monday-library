@@ -1,10 +1,24 @@
 var express = require("express");
 var router = express.Router();
 var readerModel = require("../models").reader;
+var bookModel = require('../models').book;
 
 /* GET users listing. */
 router.get("/", async (req, res) => {
-    const readers = await readerModel.findAll();
+    const readers = await readerModel.findAll(
+    {
+            include: [
+            {
+                model: bookModel,
+                as: "books"
+            },
+            ],
+            order: [
+                ["createdAt", "DESC"],
+            [{model: bookModel, as: "books"}, "createdAt", "DESC"]
+        ]
+    }
+    );
     res.json(readers);
 });
 router.post("/", (req, res) => {
