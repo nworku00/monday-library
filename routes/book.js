@@ -9,11 +9,13 @@ router.get("/", async (req, res) => {
     res.json(books);
 });
 router.post("/", (req, res) => {
-    readerModel.create({
+    let id = Number(req.body.reader_id)
+    bookModel.create({
         title: req.body.title,
         author: req.body.author,
+        reader_id: id
     });
-    res.send(`new book ${book.title} accepted`);
+    res.send(`new book accepted`);
 });
 router.get('/:id', async (req, res) => {
     const book = await bookModel.findByPk(req.params.id);
