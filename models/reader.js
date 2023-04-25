@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            reader.hasMany(models.book, { //this is stating that the reader can have many books
+                foreignKey: "reader_id", //using the id section of the "reader" table
+                as: "books"
+            })
+
         }
     }
     reader.init(
