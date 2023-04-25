@@ -17,5 +17,10 @@ router.post("/", (req, res) => {
 router.get('/:id', async (req, res) => {
     const reader = await readerModel.findByPk(req.params.id);
     res.json(reader)
+});
+router.delete('/:id', async (req, res) => {
+    const reader = await readerModel.findByPk(req.params.id);
+    reader.destroy()
+    res.send(`${reader.name} deleted`)
 })
 module.exports = router;
