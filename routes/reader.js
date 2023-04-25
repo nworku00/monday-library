@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
         name: req.body.name,
         address: req.body.address,
     });
-    res.send("new reader accepted");
+    res.send(`${reader.name} new reader accepted`);
 });
 router.get('/:id', async (req, res) => {
     const reader = await readerModel.findByPk(req.params.id);
