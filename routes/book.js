@@ -13,10 +13,15 @@ router.post("/", (req, res) => {
         title: req.body.title,
         author: req.body.author,
     });
-    res.send("new book accepted");
+    res.send(`new book ${book.title} accepted`);
 });
 router.get('/:id', async (req, res) => {
     const book = await bookModel.findByPk(req.params.id);
     res.json(book)
+})
+router.delete('/:id', async (req, res) => {
+    const book = await bookModel.findByPk(req.params.id);
+    book.destroy()
+    res.send(`${book.title} deleted`)
 })
 module.exports = router;
