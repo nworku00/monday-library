@@ -1,10 +1,11 @@
 var express = require("express");
 var router = express.Router();
+const { authenticate } = require('../middlewares/auth');
 var readerModel = require("../models").reader;
 var bookModel = require('../models').book;
 var readerController = require('../controllers').reader
 
-router.get('/', readerController.list);
+router.get('/', authenticate, readerController.list);
 router.post('/', readerController.add);
 router.get('/:id', readerController.getById);
 router.delete('/:id', readerController.delete);

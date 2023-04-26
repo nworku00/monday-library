@@ -1,9 +1,19 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+const { authenticate } = require('../middlewares/auth');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+var readerController = require('../controllers').reader
+var bookController = require('../controllers').book
+
+router.get('/reader', authenticate, readerController.list);
+router.post('/reader', readerController.add);
+router.get('/reader/:id', readerController.getById);
+router.delete('/reader/:id', readerController.delete);
+
+router.get('/book', bookController.list);
+router.post('/book', bookController.add);
+router.get('/book/:id', bookController.getById);
+router.delete('/book/:id', bookController.delete);
+
 
 module.exports = router;
